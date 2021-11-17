@@ -22,7 +22,7 @@ def get_images(url):
 	my_bar = st.progress(0)
 	i=0
 	tick = 100//num
-	for item in seq:
+	for item in seq[:4]:
 		my_bar.progress(i+tick)
 		image_url = item['images'][0]['resource']['@id']
 		image = Image.open(requests.get(image_url, stream=True).raw)
@@ -88,7 +88,7 @@ if run_search:
 		image = cv2.imdecode(file_bytes, 3)
 		corrected_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 		images = [image]
-	col5, col6 = st.columns(2)
+	col5, col6, col7 = st.columns(3)
 	for image in images:
 		if image_location == 'IIIF':
 
@@ -97,13 +97,14 @@ if run_search:
 			image = np.array(image)
 
 
-			col5.image(image)
+			# col5.image(image)
 		else:
 			# pass
 			# file_bytes = np.asarray(image, dtype=np.uint8)
 			# image = cv2.imdecode(file_bytes, 3)
 			# image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-			col5.image(corrected_image)
+			# col5.image(corrected_image)
+			pass
 		dimensions = image.shape
 
 		if boundaries == "Red":
@@ -123,11 +124,20 @@ if run_search:
 		output = cv2.bitwise_and(image, image, mask = mask)
 			# output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
 		final = np.hstack([image, output])
-		col6.image(mask)
-
+		# col6.image(mask)
+		# df = pd.DataFrame([image, mask, "test"])
 		colored = cv2.countNonZero(mask)
-		# col6.write(f"Number of Colored Pixles: {colored}")
+		# col7.write(f"Number of Colored Pixles: {colored}")
 		totalpixels = dimensions[0] * dimensions[1]
-		# col6.write(f"Total Number of Pixles in Image: {totalpixels}")
+		# col7.write(f"Total Number of Pixles in Image: {totalpixels}")
 		pixpercent = "{:.0%}".format(colored / totalpixels )
-		# col6.write(f"Percentage of Pixles that Match {pixpercent}")
+		# col7.write(f"Percentage of Pixles that Match {pixpercent}")
+		for i in range(1, 3):
+
+			cols = st.columns(3)
+			if image_location == "Local":
+				cols[0].image(corrected_image)
+			else:
+				cols[0].image(image)
+			cols[1].image(mask)
+			cols[2].write(f"{pixpercent}")
