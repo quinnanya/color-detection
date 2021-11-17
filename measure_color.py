@@ -91,14 +91,19 @@ if run_search:
 	col5, col6 = st.columns(2)
 	for image in images:
 		if image_location == 'IIIF':
+
 			image = image.convert('RGB')
+
 			image = np.array(image)
+
+
+			col5.image(image)
 		else:
-			pass
+			# pass
 			# file_bytes = np.asarray(image, dtype=np.uint8)
 			# image = cv2.imdecode(file_bytes, 3)
 			# image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-		col5.image(corrected_image)
+			col5.image(corrected_image)
 		dimensions = image.shape
 
 		if boundaries == "Red":
