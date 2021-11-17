@@ -126,8 +126,8 @@ if run_search:
 		col6.image(mask)
 
 		colored = cv2.countNonZero(mask)
-		# col6.write(f"Number of Colored Pixles: {colored}")
+		st.write(f"Number of Colored Pixles: {colored}")
 		totalpixels = dimensions[0] * dimensions[1]
-		# col6.write(f"Total Number of Pixles in Image: {totalpixels}")
+		st.write(f"Total Number of Pixles in Image: {totalpixels}")
 		pixpercent = "{:.0%}".format(colored / totalpixels )
-		# col6.write(f"Percentage of Pixles that Match {pixpercent}")
+		st.write(f"Percentage of Pixles that Match {pixpercent}")
