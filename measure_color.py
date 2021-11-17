@@ -22,7 +22,7 @@ def get_images(url):
 	my_bar = st.progress(0)
 	i=0
 	tick = 100//num
-	for item in seq[:2]:
+	for item in seq:
 		my_bar.progress(i+tick)
 		image_url = item['images'][0]['resource']['@id']
 		image = Image.open(requests.get(image_url, stream=True).raw)
