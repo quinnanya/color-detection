@@ -135,6 +135,9 @@ if run_search:
 		for i in range(1, 3):
 
 			cols = st.columns(3)
-			cols[0].image(image)
+			if image_location == "Local":
+				cols[0].image(corrected_image)
+			else:
+				cols[0].image(image)
 			cols[1].image(mask)
 			cols[2].write(f"{pixpercent}")
