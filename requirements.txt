@@ -3,3 +3,4 @@ pandas
 numpy
 streamlit-aggrid
 streamlit>=0.86.0
+libgl1-mesa-glx
