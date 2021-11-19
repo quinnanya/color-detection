@@ -1,4 +1,4 @@
-opencv-python3
+opencv-python>=4.5.3.56
 pandas
 numpy
 streamlit-aggrid
